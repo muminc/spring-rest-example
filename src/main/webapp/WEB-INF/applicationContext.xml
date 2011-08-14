@@ -11,15 +11,19 @@
 			http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 
+    <!--<bean id="loggerInterceptor" class="com.choudhury.logger.LoggerInterceptor" />-->
+    <!--<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"   p:interceptors-ref="loggerInterceptor" />-->
+
+
     <context:annotation-config />
 
 	<!--<mvc:annotation-driven />-->    <!-- https://jira.springsource.org/browse/SPR-7895 -->
 
     <context:component-scan base-package="com.choudhury" />
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" p:order="3" p:alwaysUseFullPath="true"/>
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" p:order="3"/>
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" p:alwaysUseFullPath="true" p:order="3">
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" p:order="3">
         <property name="messageConverters">
             <list>
                 <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
