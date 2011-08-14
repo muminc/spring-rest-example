@@ -16,7 +16,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
     static {
         BasicConfigurator.configure();
-        logger.setLevel((Level) Level.INFO);
+        logger.setLevel(Level.INFO);
     }
 
     @Override
