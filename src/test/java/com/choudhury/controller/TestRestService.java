@@ -1,9 +1,13 @@
 package com.choudhury.controller;
 
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
 
 
 public class TestRestService extends BaseWebApplicationContextTests {
@@ -37,7 +41,12 @@ public class TestRestService extends BaseWebApplicationContextTests {
         String result = response.getContentAsString();
         Assert.assertEquals(200, response.getStatus());
         String expectedJSON = "{\"author\":\"William Smith\",\"title\":\"Advanced Java\",\"id\":2}";
-        Assert.assertEquals(expectedJSON, result);
+        Assert.assertEquals(createTree(expectedJSON), createTree(result));
+    }
+
+    private JsonNode createTree(String jsonString) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(jsonString, JsonNode.class);
     }
 
     @Test
@@ -71,7 +80,7 @@ public class TestRestService extends BaseWebApplicationContextTests {
         Assert.assertEquals(201, status);
         long expectedId=bookService.getBookCount();
         String expectedJSON = "{\"objectWithId\":{\"id\":"+expectedId+"}}";
-        Assert.assertEquals(expectedJSON, result);
+        Assert.assertEquals(createTree(expectedJSON), createTree(result));
     }
 
 }
