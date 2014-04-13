@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -16,7 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.HandlerAdapter;
 
 import javax.annotation.Resource;
 
@@ -38,7 +36,7 @@ public abstract class BaseWebApplicationContextTests {
 
     protected MockHttpServletRequest request;
     protected MockHttpServletResponse response;
-    protected RestController controller;
+    protected BookRestController controller;
     protected BookService bookService;
 
 
@@ -59,7 +57,7 @@ public abstract class BaseWebApplicationContextTests {
 
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
-        controller = (RestController) applicationContext.getBean("restController");
+        controller = (BookRestController) applicationContext.getBean("bookRestController");
         bookService = (BookService)applicationContext.getBean("bookService");
         MockServletContext servletContext = new MockServletContext("src/main/webapp", new FileSystemResourceLoader());
 

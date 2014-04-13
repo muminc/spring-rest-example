@@ -1,8 +1,9 @@
 package com.choudhury.controller;
 
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,7 +80,7 @@ public class TestRestService extends BaseWebApplicationContextTests {
         int status = response.getStatus();
         Assert.assertEquals(201, status);
         long expectedId=bookService.getBookCount();
-        String expectedJSON = "{\"objectWithId\":{\"id\":"+expectedId+"}}";
+        String expectedJSON = "{\"id\":"+expectedId+"}";
         Assert.assertEquals(createTree(expectedJSON), createTree(result));
     }
 
