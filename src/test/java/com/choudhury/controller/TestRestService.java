@@ -5,7 +5,6 @@ package com.choudhury.controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -18,14 +17,14 @@ public class TestRestService extends BaseWebApplicationContextTests {
         request.setMethod("GET");
         request.addHeader("Accept", "application/xml");
         request.addHeader("Content-Type", "application/xml");
-        request.setRequestURI("/book/2");
+        request.setRequestURI("/book/1");
         request.setContentType("application/xml");
         request.setMethod("GET");
 
         servlet.service(request, response);
         String result = response.getContentAsString();
         Assert.assertEquals(200, response.getStatus());
-        String expectedXML = "<book><id>2</id><author>William Smith</author><title>Advanced Java</title></book>";
+        String expectedXML = "<book><id>1</id><author>William Smith</author><title>Advanced Java</title></book>";
         Assert.assertEquals(expectedXML, result);
     }
 
@@ -34,14 +33,14 @@ public class TestRestService extends BaseWebApplicationContextTests {
         request.setMethod("GET");
         request.addHeader("Accept", "application/json");
         request.addHeader("Content-Type", "application/xml");
-        request.setRequestURI("/book/2");
+        request.setRequestURI("/book/1");
         request.setContentType("application/xml");
         request.setMethod("GET");
 
         servlet.service(request, response);
         String result = response.getContentAsString();
         Assert.assertEquals(200, response.getStatus());
-        String expectedJSON = "{\"author\":\"William Smith\",\"title\":\"Advanced Java\",\"id\":2}";
+        String expectedJSON = "{\"author\":\"William Smith\",\"title\":\"Advanced Java\",\"id\":1}";
         Assert.assertEquals(createTree(expectedJSON), createTree(result));
     }
 
@@ -62,7 +61,7 @@ public class TestRestService extends BaseWebApplicationContextTests {
         String result = response.getContentAsString();
         int status = response.getStatus();
         Assert.assertEquals(201, status);
-        long expectedId=bookService.getBookCount();
+        long expectedId=bookService.getBookCount()-1;
         String expectedXML = "<object><id>"+expectedId+"</id></object>";
         Assert.assertEquals(expectedXML, result);
     }
@@ -79,7 +78,7 @@ public class TestRestService extends BaseWebApplicationContextTests {
         String result = response.getContentAsString();
         int status = response.getStatus();
         Assert.assertEquals(201, status);
-        long expectedId=bookService.getBookCount();
+        long expectedId=bookService.getBookCount()-1;
         String expectedJSON = "{\"id\":"+expectedId+"}";
         Assert.assertEquals(createTree(expectedJSON), createTree(result));
     }

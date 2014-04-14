@@ -3,7 +3,8 @@ package com.choudhury.controller;
 import com.choudhury.domain.Book;
 import com.choudhury.domain.ObjectWithId;
 import com.choudhury.service.BookService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,7 @@ public class BookRestController {
     @Resource(name="bookService")
     private BookService bookService;
 
-    protected static Logger logger = Logger.getLogger(BookRestController.class.getName());
+    private Logger logger=LoggerFactory.getLogger(BookRestController.class);
 
 
     @RequestMapping(value = "/{id}",

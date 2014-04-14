@@ -2,16 +2,19 @@ package com.choudhury.impl;
 
 import com.choudhury.domain.Book;
 import com.choudhury.service.BookService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service("bookService")
 public class BookServiceImpl implements BookService{
 
-     protected static Logger logger = Logger.getLogger(BookServiceImpl.class.getName());
+    private static Logger logger= LoggerFactory.getLogger(BookServiceImpl.class);
+    private AtomicInteger atomicInteger=new AtomicInteger(0);
 
     public BookServiceImpl()
     {
@@ -19,7 +22,7 @@ public class BookServiceImpl implements BookService{
     }
 
     // In-memory list
-	private List<Book> books = new ArrayList<Book>();
+    private List<Book> books = new ArrayList<>();
 
     private void init()
     {
@@ -28,6 +31,7 @@ public class BookServiceImpl implements BookService{
     }
 
     public Book getBook(long id) {
+        logger.info("Retrieving id {}",id);
         for (Book book : books) {
             if (book.getId()==id)
             {
@@ -39,14 +43,14 @@ public class BookServiceImpl implements BookService{
 
     public long addBook(Book book)
     {
-      int idTodSet=books.size()+1;
-      book.setId(idTodSet);
-      books.add(book);
-      return idTodSet;
+        int idTodSet=atomicInteger.getAndIncrement();
+        book.setId(idTodSet);
+        books.add(book);
+        return idTodSet;
     }
 
     public long addBook(String author, String title) {
-        Book book = new Book(books.size() + 1, author, title);
+        Book book = new Book(-1, author, title);
         return addBook(book);
     }
 
