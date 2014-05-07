@@ -4,13 +4,13 @@ import com.choudhury.domain.Book;
 import com.choudhury.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.inject.Named;
 
-@Service("bookService")
+@Named("bookService")
 public class BookServiceImpl implements BookService{
 
     private static Logger logger= LoggerFactory.getLogger(BookServiceImpl.class);

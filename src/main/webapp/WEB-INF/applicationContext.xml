@@ -13,7 +13,6 @@
 			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 
-  <!--<bean id="loggerInterceptor" class="com.choudhury.logger.LoggerInterceptor" />-->
 
   <context:annotation-config />
 

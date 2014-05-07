@@ -20,7 +20,6 @@ import javax.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/applicationContext.xml"})
-
 public abstract class BaseWebApplicationContextTests {
 
 
