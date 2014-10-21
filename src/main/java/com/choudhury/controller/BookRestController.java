@@ -27,6 +27,8 @@ public class BookRestController {
 
     private Logger logger=LoggerFactory.getLogger(BookRestController.class);
 
+
+    //Note: The @Named("bookService") is not required in this example (as there only instance of BookService around)
     @Inject
     public BookRestController(@Named("bookService") BookService bookService )
     {
