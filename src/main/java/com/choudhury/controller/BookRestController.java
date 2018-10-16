@@ -17,7 +17,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 
-import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/book")
